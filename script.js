@@ -29,3 +29,73 @@ $.each(arrObj, function(index, value) {
    console.log("Affichage age utilisant jQuery = " + value.age);
 });
 
+// index
+const div = document.createElement('div');
+const previous = document.createElement('button');
+const next = document.createElement('button');
+let i = 0;
+
+/**
+ * create a pseudo carousel
+ * @param i
+ */
+function print(i) {
+    div.style.textAlign = "center";
+    div.style.height = "500px";
+    div.style.width = "500px"
+    document.body.appendChild(div);
+
+    previous.style.margin = "auto";
+    previous.innerText = "<"
+    document.body.appendChild(previous);
+
+    next.style.margin = "auto";
+    next.innerText = ">"
+    document.body.appendChild(next);
+
+    let img = document.createElement('img');
+    img.src = arrObj[i].avatar
+    div.appendChild(img);
+
+    let p = document.createElement('p');
+    p.innerText = arrObj[i].person + " ( " + arrObj[i].age + " )";
+    div.appendChild(p);
+}
+
+next.addEventListener("click", () => {
+    i++
+
+    if (i === arrObj.length)
+        i = 0
+
+    div.innerHTML = "";
+    print(i)
+
+})
+
+previous.addEventListener("click", () => {
+    i--
+
+    if (i === -1)
+        i = 2
+
+    div.innerHTML = "";
+    print(i)
+})
+
+// index list
+function printEveryPerson() {
+    arrObj.forEach(value => {
+        let div = document.createElement('div');
+        div.style.textAlign = "center";
+        document.body.appendChild(div);
+
+        let img = document.createElement('img');
+        img.src = value.avatar
+        div.appendChild(img);
+
+        let p = document.createElement('p');
+        p.innerText = value.person + " ( " + value.age + " )";
+        div.appendChild(p);
+    });
+}
